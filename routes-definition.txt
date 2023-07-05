@@ -1,0 +1,133 @@
+POST /session/login
+Creates a cookie with a token that lets the user acces to all other endpoints
+Request body {
+  username: string,
+  password: string
+}
+
+STATUS 200
+Response body:
+{
+  message: "Logged in"
+}
+
+STATUS 400
+Response body
+{
+  message: "Bad request"
+}
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+DELETE /people/:id
+Deletes a person from the array of people
+STATUS 200
+Response body
+{
+  message: "Person deleted"
+}
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+STATUS 404
+Response body
+{
+  message: "Person not found"
+}
+
+GET /people
+Returns all the people or a part of them filtered by username and surname if passed
+Query parameters:
+
+- name: string
+- surname: string
+
+STATUS 200
+Response body
+Person[]
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+GET /people/:id
+Returns a specific person data
+
+STATUS 200
+Response body
+Person
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+STATUS 404
+Response body
+{
+  message: "Person not found"
+}
+
+DELETE /companies/:id
+Deletes a company from the companies array
+
+STATUS 200
+Response body
+{
+  message: "Company deleted"
+}
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+STATUS 404
+Response body
+{
+  message: "Company not found or cannot be deleter because it has people associated"
+}
+
+GET /companies
+Returns the list of companies that exist
+
+STATUS 200
+Response body
+Company[]
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+GET /companies/:id
+Returns company from the array of companies
+
+STATUS 200
+Response body
+Company
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+STATUS 404
+Response body
+{
+  message: "Company not found"
+}
