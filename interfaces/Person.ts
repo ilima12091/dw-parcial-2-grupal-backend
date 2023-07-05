@@ -6,6 +6,6 @@ export interface Person {
   secondSurname: string;
   email: string;
   phone: string;
-  company: number;
+  companyId: number;
   additionalNotes: string;
 }

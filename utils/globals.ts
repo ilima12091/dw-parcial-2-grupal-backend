@@ -11,7 +11,7 @@ export const people: Person[] = [
     secondSurname: "Doe",
     email: "test@test.com",
     phone: "123",
-    company: 1,
+    companyId: 1,
     additionalNotes: "",
   },
 ];
@@ -31,3 +31,17 @@ export const validUsers: User[] = [
     password: "test",
   },
 ];
+
+let nextPersonId = 2;
+
+let nextCompanyId = 2;
+
+export const getNextPersonId = () => {
+  nextPersonId++;
+  return nextPersonId - 1;
+};
+
+export const getNextCompanyId = () => {
+  nextCompanyId++;
+  return nextCompanyId - 1;
+};

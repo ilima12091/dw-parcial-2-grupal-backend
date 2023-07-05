@@ -131,3 +131,80 @@ Response body
 {
   message: "Company not found"
 }
+
+POST /companies
+Creates a new company
+Request body
+{
+  name: string;
+  website: string;
+  additionalNotes: string;
+}
+
+STATUS 200
+Response body
+Company
+
+STATUS 400
+Response body
+{
+	message: "Bad request"
+}
+
+STATUS 401
+Response body
+{
+  message: "Unauthorized"
+}
+
+POST /people
+Creates a new person
+Request body
+{
+	name: string;
+  secondName: string;
+  surname: string;
+  secondSurname: string;
+  email: string;
+  phone: string;
+  companyId: number;
+  additionalNotes: string;
+}
+
+STATUS 200
+Response body
+Person
+
+STATUS 400
+{
+	message: "Bad request"
+}
+
+STATUS 401
+{
+  message: "Unauthorized"
+}
+
+STATUS 404
+{
+	 message: "Company not found"
+}
+
+Company {
+  id: number;
+  name: string;
+  website: string;
+  additionalNotes: string;
+}
+
+Person {
+  id: number;
+  name: string;
+  secondName: string;
+  surname: string;
+  secondSurname: string;
+  email: string;
+  phone: string;
+  companyId: number;
+  additionalNotes: string;
+}

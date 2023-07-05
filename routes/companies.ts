@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { companies, people } from "../utils/globals";
+import { companies, getNextCompanyId, people } from "../utils/globals";
+import { Company } from "../interfaces/Company";
 
 const companiesRouter = Router();
 
@@ -34,6 +35,27 @@ companiesRouter.get("/:id", (req, res) => {
       message: "Company not found",
     });
   }
+});
+
+companiesRouter.post("/", (req, res) => {
+  const { name, website, additionalNotes = "" } = req.body;
+
+  if (!name || !website) {
+    return res.status(400).json({
+      message: "Bad request",
+    });
+  }
+
+  const newCompany: Company = {
+    id: getNextCompanyId(),
+    name,
+    website,
+    additionalNotes,
+  };
+
+  companies.push(newCompany);
+
+  res.json(newCompany);
 });
 
 export default companiesRouter;

@@ -1,5 +1,6 @@
 import { Router } from "express";
-import { people } from "../utils/globals";
+import { companies, getNextPersonId, people } from "../utils/globals";
+import { Person } from "../interfaces/Person";
 
 const peopleRouter = Router();
 
@@ -44,6 +45,55 @@ peopleRouter.get("/:id", (req, res) => {
       message: "Person not found",
     });
   }
+});
+
+peopleRouter.post("/", (req, res) => {
+  const {
+    name,
+    secondName,
+    surname,
+    secondSurname,
+    email,
+    phone,
+    companyId,
+    additionalNotes = "",
+  } = req.body;
+
+  if (
+    !name ||
+    !secondName ||
+    !surname ||
+    !secondSurname ||
+    !email ||
+    !phone ||
+    !companyId
+  ) {
+    return res.status(400).json({
+      message: "Bad request",
+    });
+  }
+
+  if (!companies.some((company) => company.id === parseInt(companyId))) {
+    return res.status(404).json({
+      message: "Company not found",
+    });
+  }
+
+  const newPerson: Person = {
+    id: getNextPersonId(),
+    name,
+    secondName,
+    surname,
+    secondSurname,
+    email,
+    phone,
+    companyId: parseInt(companyId),
+    additionalNotes,
+  };
+
+  people.push(newPerson);
+
+  res.json(newPerson);
 });
 
 export default peopleRouter;
